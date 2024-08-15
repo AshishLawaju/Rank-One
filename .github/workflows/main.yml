@@ -9,12 +9,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
 
-      #runs a single command using the runners shell
-      - name: Run react build script
+      # Install Node.js and dependencies
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18' # Use the version of Node.js your project requires
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build the project
         run: npm run build
-        env:
-          CI: false
 
       # Deploy to cPanel
       - name: FTP-Deploy-Action
