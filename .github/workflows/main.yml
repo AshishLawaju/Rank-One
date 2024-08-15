@@ -9,6 +9,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      #runs a single command using the runners shell
+      - name: Run react build script
+        run: npm run build
+        env:
+          CI: false
+
         with:
           fetch-depth: 1
       # Deploy to cPanel
